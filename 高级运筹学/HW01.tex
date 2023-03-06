@@ -1,0 +1,35 @@
+\documentclass{../notes}
+
+\title{高级运筹学}
+
+\newcommand{\hull}{\mathrm{hull}}
+
+\begin{document}
+    \maketitle
+
+    Vectors $x_0, x_1, \ldots x_n\in \bbR^m$ are affinely independent if and only if vectors $(x_i - x_0)\in \bbR^m$ are linearly independent.
+
+    \paragraph*{$\Rightarrow$} 设向量集合$V = \{x_0, x_1, \ldots, x_n\}$，若其仿射无关，则满足
+
+    \begin{equation}
+        \sum_{i=0} c_i = \sum_{i=0} c_i x_i = 0 \Leftrightarrow c_i = 0
+        \label{eq:1}
+    \end{equation}
+
+    考虑$y_i = (x_i - x_0), i = 1, \ldots, n$的线性组合。假设$y_i$线性相关，则存在$a_1, \ldots a_n \not = 0$满足$\sum_{i=1} a_i y_i = 0$，即$\sum_{i=1} a_i(x_i - x_0) = 0$，而该式又可写作
+
+    \begin{equation}
+        -\sum a_i x_0 + a_1x_1 + \cdots + a_n x_n = 0
+        \label{eq:2}
+    \end{equation}
+
+    注意到同时有$-\left(\sum_{i=1} a_i\right) + a_1 + \cdots + a_n = 0$，由\eqnref{eq:1}得到$a_i = 0$，与假设矛盾，因此$(x_i - x_0)$线性独立。
+
+    \paragraph*{$\Leftarrow$} 设向量集合$V = \{x_0, x_1, \ldots, x_n\}$满足$(x_i - x_0)$线性独立。    假设$x_0, \ldots x_n$仿射相关，即存在$c_0, \ldots c_n \not = 0$，使得$\sum_{i=0} c_i = \sum_{i=0} c_i x_i = 0$成立。则有$c_0 = -\sum_{i=1} c_i$，则
+
+    \begin{equation}
+        \sum_{i=0}c_i x_i = \left(\sum_{i=1} c_i x_i\right) - \sum_{i=1}c_i x_0 = \sum_{i=1} c_i(x_i - x_0) = 0 \label{eq:3}
+    \end{equation}
+
+    根据线性独立的条件有$c_i = 0$，与$c_i\not = 0$的假设矛盾，因此$x_0, \ldots x_n$仿射无关。
+\end{document}
