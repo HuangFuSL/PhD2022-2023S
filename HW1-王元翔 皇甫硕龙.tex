@@ -1,0 +1,78 @@
+\PassOptionsToPackage{quiet}{fontspec}
+\documentclass{notes}
+
+\title{HW01}
+
+\author{王元翔\;2022311937\\皇甫硕龙\;2022311931}
+
+\begin{document}
+	\maketitle
+	%Problem 1
+	\noindent\textbf{Problem 1}
+
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item The treatment $D$: the diet provided in the university dining halls.
+
+		The potential outcome $Y(1)$: the weight of the student treated by the university dining halls in June.
+
+		The potential outcome $Y(0)$: the weight of the student treated by himself in June.
+		\item Suppose the university focuses average treatment effects, the casual parameters that the university hopes to know is
+
+		\begin{equation}
+			\mathbb{E}[Y(1)-Y(0)]
+		\end{equation}
+		\item Not right. There is no control treatment. So there might be confounders affect the weight which offset the dining hall diet but not be considered. That is, the treatment assignment mechanism is not known. Moreover, there is no stability assumptions, so the individuals might also affect each other which might offset the effect.
+		\item Not right. The reason is similar to part(c), there is no control treatment and necessary assumptions.
+	\end{enumerate}
+
+	\noindent\textbf{Problem 2}
+
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item The proof can be shown as:
+		\begin{equation}
+			\begin{aligned}
+				\tau_{\mathrm{ATT}} &= \mathbb{E}[Y(1)-Y(0)|D=1] \\
+				&= \mathbb{E}[Y(1)|D=1]-\mathbb{E}[Y(0)|D=1] \\
+				&= \mathbb{E}[Y|D=1]-\mathbb{E}[\mathbb{E}[Y(0)|X]|D=1] \\
+				&= \mathbb{E}[Y|D=1]-\mathbb{E}[\mathbb{E}[Y(0)|D=0,X]|D=1](unconfoundedness) \\
+				&= \mathbb{E}[Y|D=1]-\mathbb{E}[\mathbb{E}[Y|D=0,X]|D=1] \\
+				\Box
+			\end{aligned}
+		\end{equation}
+		\item A weaker condition $e(X)=\mathbb{P}(D=1|X)\in [0,1)$ is possible to be used. That's because in our proof, what we need is $\mathbb{E}[Y(0)|D=0,X]$ is meaningful which means the individuals surely assigned into the treated group can't exist, but it doesn't matter if some individuals are surely assigned into the control group.
+		\item Proof:
+		\begin{align*}
+			\tau_{\mathrm{ATT}} &= \mathbb{E}[Y|D=1]-\mathbb{E}[\mathbb{E}[Y|D=0,X]|D=1] \\
+			&= \mathbb{E}[\mathbb{E}[Y(1)|X]|D=1]-\mathbb{E}[\mathbb{E}[Y|D=0,X]|D=1] \\
+			&= \mathbb{E}[\mathbb{E}[Y(1)|D=1,X]|D=1]-\mathbb{E}[\mathbb{E}[Y|D=0,X]|D=1] \\
+			&= \mathbb{E}[\mathbb{E}[Y|D=1,X]-\mathbb{E}[Y|D=0,X]|D=1]
+		\end{align*}
+		 The difference between identification formula for ATE and ATT is that ATE is under no condition, but ATT is under the condition of $D=1$. That is, $\tau_{\mathrm{ATE}}$ directly compares the treated group and the control group, while $\tau_{\mathrm{ATT}}$ only compares the different outcomes in treated group.
+		\item The proof can be shown as:
+		\begin{align*}
+			\tau_{\mathrm{CATE}}(x_1) &= \mathbb{E}[Y(1)-Y(0)|X_1=x_1] \\
+			&= \mathbb{E}[Y(1)|X_1=x_1] - \mathbb{E}[Y(0)|X_1=x_1] \\
+			&= \mathbb{E}[Y|D=1,X_1=x_1] - \mathbb{E}[Y|D=0,X_1=x_1] (unconfoundedness)
+		\end{align*}
+		We've known overlap assumption is valid, so $\mathbb{E}[Y|D=1,X_1=x_1]$ and $\mathbb{E}[Y|D=0,X_1=x_1]$ are meaningful and observable, so $\tau_{\mathrm{CATE}}(x_1)$ are identifiable.
+	\end{enumerate}
+
+	\noindent\textbf{Problem 3}
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item No, since there exists $T \rightarrow M_1 \rightarrow M_2\rightarrow Y$ which is a chain, and $T\leftarrow W_1\leftarrow W_2\rightarrow W_3\rightarrow Y$ which is a fork.
+		\item No, there exists a chain $T\rightarrow M_1\rightarrow M_2\rightarrow Y$.
+		\item Yes, when $\{W_2, M_1\}$ is conditioned, both the chain and the fork would be blocked.\label{3.c}
+		\item Yes, when $\{W_1, M_2\}$ is conditioned, the result is same as in \ref{3.c}.\label{3.d}
+		\item No, in path $T\rightarrow X_1\rightarrow X_2\leftarrow X_3\leftarrow Y$, $X_2$ is a collider of $T, Y$. Conditioning on collider $X_2$ will lead to dependence between $T$ and $Y$.
+		\item Yes, according to \ref{3.d}, when $\{W_1, M_2\}$ is conditioned on, the chain and the fork are blocked. Moreover, $X_2\leftarrow X_3\leftarrow Y$ would be blocked if $\{X_2, X_3\}$ is conditioned on. Then $T$ and $Y$ would be independent.
+		\item $p(y|\mathrm{do}(t)) = \sum_{w_2}p(y|t, w_2)p(w_2)$
+	\end{enumerate}
+
+	\noindent\textbf{Problem 4}
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item Yes, since \textbf{(1)} $\{U_1, U_2\}$ does not have any descendants of $D$ and \textbf{(2)} the path between $D$ and $Y$ which contains an arrow to $D$ is blocked by $U_2$.
+		\item $P(Y|\mathrm{do}(d)) = \sum_{x} P(Y|\mathrm{do}(d), x)P(x|\mathrm{do}(d))$
+		\item The backdoor path between $D$ and $Y$ is not blocked by $\varnothing$ as the path $Y\rightarrow U_1\rightarrow X\rightarrow D$ exists. Controlling on $X$ is not sufficient to remove all non-causal association between $D$ and $Y$ since $X$ is a collider.
+		\item Controlling on $\{X, Z_2\}$ or $\{X, Z_1\}$ should be sufficient to identify the average treatment effect.
+	\end{enumerate}
+\end{document}

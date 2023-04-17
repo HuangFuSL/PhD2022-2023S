@@ -52,6 +52,7 @@
 
 \newcommand{\separate}[1][0.5pt]{\rule{0.25\textwidth}{0pt}\rule{0.5\textwidth}{#1}}
 
+\newcommand{\bbE}{\mathbb E}
 \newcommand{\bbN}{\mathbb N}
 \newcommand{\bbR}{\mathbb R}
 \newcommand{\bbZ}{\mathbb Z}
